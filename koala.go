@@ -4,9 +4,12 @@ import (
 	"fmt"
 	"io/fs"
 	"path/filepath"
+    "os"
+
+    tea "github.com/charmbracelet/bubbletea"
 )
 
-func main() {
+func walkDir(dir string) {
 	subDirToSkip := "skip"
 
     walkDir := "C:/Users/avili/Documents/"
@@ -27,4 +30,13 @@ func main() {
 		fmt.Printf("error walking the path %q: %v\n", walkDir, err)
 		return
 	}
+}
+
+func main() {
+
+    p := tea.NewProgram(InitialModel())
+    if err := p.Start(); err != nil {
+        fmt.Printf("Alas, there's been an error: %v", err)
+        os.Exit(1)
+    }
 }
